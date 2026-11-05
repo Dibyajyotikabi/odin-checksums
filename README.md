@@ -2,15 +2,15 @@
 
 SHA-256 checksums for the Odin3 ZIP files hosted at [getodintool.com](https://getodintool.com/older-versions/).
 
-I put this list here so you can check that the file you downloaded is the same one I hosted, byte for byte. Every hash below was recomputed from the live files on 2026-10-02.
+I keep this list so you can compare your downloaded ZIP with the copy hosted on Get Odin Tool. On November 5, 2026, I downloaded all 21 archives again and checked their sizes and SHA-256 values. The byte sizes match the table below, and all 21 hashes match both [SHA256SUMS](SHA256SUMS) and the website's download cards.
 
 ## What this does and doesn't tell you
 
-A matching checksum means your download wasn't corrupted or swapped on the way. It doesn't prove the file came from Samsung. Samsung has never published Odin for the public, and every copy you can find online traces back to a leak, so no one can give you an official hash to compare against.
+A matching hash identifies the reference copy used for this list. It doesn't certify the publisher, assess malicious behavior or establish that the program will work with your Galaxy. Keep the download source, Windows security notices and device requirements as separate checks.
 
-Version 3.14.4 needs a special note. Its program code is identical to v3.14.1, but the ZIP ships with an extra DLL and edited resources. I explain what I found on the [latest version page](https://getodintool.com/latest/). If you want the build without the extra DLL, use v3.14.1.
+The [v3.14.4 ZIP](https://getodintool.com/wp-content/uploads/2026/09/Odin3-v3.14.4.zip) and [v3.14.1 ZIP](https://getodintool.com/wp-content/uploads/2026/09/Odin3-v3.14.1.zip) contain EXEs with matching 2,016,256-byte `.text` sections. Their whole-file hashes differ. Both packages include `SS_DL.dll`, and those DLL files differ too; v3.14.4 also includes `cpprest141_2_10.dll`.
 
-Scan any download before you run it, and only flash firmware that matches your exact model.
+Matching one executable section does not establish equal behavior for the complete packages. The [package comparison](https://getodintool.com/latest/) explains the limits of that finding. These checks did not run either EXE or flash a device.
 
 ## How to check a file
 
@@ -20,19 +20,35 @@ On Windows, open PowerShell in the folder with the ZIP and run:
 Get-FileHash .\Odin3-v3.14.1.zip -Algorithm SHA256
 ```
 
-Or use Command Prompt:
+Read the value under Hash and compare it with this file's table entry. Microsoft's [Get-FileHash reference](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-filehash) documents the command.
+
+Or use [certutil in Command Prompt](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/certutil):
 
 ```
 certutil -hashfile Odin3-v3.14.1.zip SHA256
 ```
 
-On macOS or Linux:
+With `shasum` on macOS or Linux:
 
 ```
 shasum -a 256 Odin3-v3.14.1.zip
 ```
 
-Compare the output to the table below. If you want to check everything at once, put `SHA256SUMS` next to the ZIPs and run `sha256sum -c SHA256SUMS`.
+The [shasum manual](https://perldoc.perl.org/shasum) documents the SHA-256 option and checklist format.
+
+If you have the complete collection, put all 21 ZIPs and `SHA256SUMS` in one folder. With [GNU Coreutils](https://www.gnu.org/software/coreutils/manual/html_node/sha2-utilities.html), run:
+
+```
+sha256sum -c SHA256SUMS
+```
+
+With `shasum`, use:
+
+```
+shasum -a 256 -c SHA256SUMS
+```
+
+These checklist commands expect the listed files to be present. A missing-file error means that entry could not be checked. If you downloaded just one ZIP, use its single-file command above instead.
 
 ## Checksums
 
@@ -66,4 +82,4 @@ Compare the output to the table below. If you want to check everything at once, 
 - [How to use Odin to flash Samsung firmware](https://getodintool.com/tutorial/)
 - [Odin error messages explained](https://getodintool.com/odin-errors/)
 
-If a hash doesn't match, open an issue and tell me the version and where you downloaded it.
+If your result differs, open an issue with the ZIP version, byte size, calculated SHA-256 and download URL. Those details let me compare the same file you checked.
