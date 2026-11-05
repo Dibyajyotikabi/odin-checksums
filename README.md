@@ -12,6 +12,31 @@ The [v3.14.4 ZIP](https://getodintool.com/wp-content/uploads/2026/09/Odin3-v3.14
 
 Matching one executable section does not establish equal behavior for the complete packages. The [package comparison](https://getodintool.com/latest/) explains the limits of that finding. These checks did not run either EXE or flash a device.
 
+## How to read the executable metadata
+
+The [executable metadata CSV](odin-executable-metadata.csv) records the EXE path, byte size and SHA-256 for all 21 archives I checked on November 5, 2026. It also includes the PE header and version fields from each EXE. Start with the row for your downloaded ZIP.
+
+The two hash columns apply to different files. Use `zip_sha256` for the original ZIP and `executable_sha256` for the extracted program.
+
+For example, open PowerShell in the extracted `Odin3-v3.12.7` folder and run:
+
+```powershell
+Get-FileHash -LiteralPath '.\Odin3 v3.12.7.exe' -Algorithm SHA256
+```
+
+Compare the result with `executable_sha256` in the `Odin3-v3.12.7.zip` row. For the single-file `certutil` or `shasum` examples below, replace the ZIP name with the EXE filename in double quotes.
+
+For versions, keep the two field types separate. The `fixed_file_version` and `fixed_product_version` columns hold the numeric [VS_FIXEDFILEINFO](https://learn.microsoft.com/en-us/windows/win32/api/verrsrc/ns-verrsrc-vs_fixedfileinfo) values. The `file_version_string` and `product_version_string` columns hold [StringFileInfo](https://learn.microsoft.com/en-us/windows/win32/menurc/stringfileinfo) text.
+
+Here are two examples from the checked files:
+
+| ZIP | Version field | Fixed numeric value | Text value |
+| --- | --- | --- | --- |
+| Odin3-v3.12.7.zip | File version | `2016.8.10.1` | `2017.4.25.1` |
+| Odin3-v3.12.4.zip | Product version | `3.12.5.0` | `3.12.4.0` |
+
+Keep both values when comparing files. They record metadata in these particular EXEs. Support for a Windows version or a Galaxy model needs separate testing.
+
 ## How to check a file
 
 On Windows, open PowerShell in the folder with the ZIP and run:
