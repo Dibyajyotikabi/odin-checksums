@@ -16,6 +16,10 @@ Matching one executable section does not establish equal behavior for the comple
 
 The [executable metadata CSV](odin-executable-metadata.csv) records the EXE path, byte size and SHA-256 for all 21 archives I checked on November 5, 2026. It also includes the PE header and version fields from each EXE. Start with the row for your downloaded ZIP.
 
+On November 6, I checked the embedded PE certificate table in each of those 21 EXEs. I compared the header fields with the Security Directory output from `objdump --private-headers`. Both readers reported a zero offset and zero size for every file. [Certificate table measurements](odin-embedded-certificate-tables.csv) · [Microsoft PE format](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#the-attribute-certificate-table-image-only)
+
+Use the EXE's SHA-256 to find the row for your copy. Windows can also verify a signature through a separate catalog. [Microsoft Authenticode documentation](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/authenticode)
+
 The two hash columns apply to different files. Use `zip_sha256` for the original ZIP and `executable_sha256` for the extracted program.
 
 For example, open PowerShell in the extracted `Odin3-v3.12.7` folder and run:
