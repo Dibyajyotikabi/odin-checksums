@@ -12,6 +12,19 @@ The [v3.14.4 ZIP](https://getodintool.com/wp-content/uploads/2026/09/Odin3-v3.14
 
 Matching one executable section does not establish equal behavior for the complete packages. The [package comparison](https://getodintool.com/latest/) explains the limits of that finding. These checks did not run either EXE or flash a device.
 
+## Why can Odin 3.14.4 ZIP checksums differ?
+
+These two Odin 3.14.4 ZIPs have different SHA-256 values. Their `Odin3_v3.14.4.exe`, `cpprest141_2_10.dll` and `SS_DL.dll` files match byte for byte. The `Odin3.ini` files differ, and the packages include different text or shortcut files. Keep the ZIP result separate from the result for its extracted EXE.
+
+I compared the file bytes on November 8, 2026. The Get Odin Tool reference was the local archived ZIP matching the [November 5 metadata record](https://github.com/Dibyajyotikabi/odin-checksums/blob/b047487/odin-executable-metadata.csv). The other ZIP was [downloaded from odindownloader.com](https://odindownloader.com/wp-content/uploads/Odin3_v3.14.4.zip) on November 8.
+
+| Archive record | ZIP size in bytes | ZIP SHA-256 |
+| --- | ---: | --- |
+| Get Odin Tool archived reference | 4,511,538 | `eda427680fbd16716b8a4856fd450857d1bcc75e379ac90b9165e49d9d652828` |
+| odindownloader.com download | 4,510,751 | `f68e3aa298ab44400afd0e7d0492aa6d818bea1ad6899e21b569e01a2c757473` |
+
+The [comparison CSV](odin-v3.14.4-archive-comparison.csv) lists both ZIPs and every file inside them, with the source, size and SHA-256 for each record. You can also [compare a ZIP or EXE in your browser](https://getodintool.com/#odin-file-checker). This was an archive inspection; no program was run or phone flashed.
+
 ## How to read the executable metadata
 
 The [executable metadata CSV](odin-executable-metadata.csv) records the EXE path, byte size and SHA-256 for all 21 archives I checked on November 5, 2026. It also includes the PE header and version fields from each EXE. Start with the row for your downloaded ZIP.
