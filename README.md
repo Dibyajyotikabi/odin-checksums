@@ -14,16 +14,21 @@ Matching one executable section does not establish equal behavior for the comple
 
 ## Why can Odin 3.14.4 ZIP checksums differ?
 
-These two Odin 3.14.4 ZIPs have different SHA-256 values. Their `Odin3_v3.14.4.exe`, `cpprest141_2_10.dll` and `SS_DL.dll` files match byte for byte. The `Odin3.ini` files differ, and the packages include different text or shortcut files. Keep the ZIP result separate from the result for its extracted EXE.
+I measured three ZIPs labeled Odin 3.14.4. Each ZIP has its own SHA-256. The Get Odin Tool and OdinDownloader copies have matching EXE and DLL files. Their INI files and extras differ.
 
-I compared the file bytes on November 8, 2026. The Get Odin Tool reference was the local archived ZIP matching the [November 5 metadata record](https://github.com/Dibyajyotikabi/odin-checksums/blob/b047487/odin-executable-metadata.csv). The other ZIP was [downloaded from odindownloader.com](https://odindownloader.com/wp-content/uploads/Odin3_v3.14.4.zip) on November 8.
+The SamUpdater ZIP contains `Odin3_v3.14.4.exe` and `Odin3.ini`. Both have different hashes from the corresponding files in the other two packages.
+
+The raw `.text` section in the SamUpdater EXE matches the one in the Get Odin Tool EXE. Each section is 2,016,256 bytes and has SHA-256 `1d925c5596a0527406bd8313eb854cd33f3352c993b0c53ce3cfacfbc412c6fc`. [Microsoft PE format](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format)
+
+I used the archived Get Odin Tool reference from the November 5 file check. The OdinDownloader ZIP was downloaded on November 8 and the SamUpdater ZIP on November 9, 2026. [Get Odin Tool file record](https://github.com/Dibyajyotikabi/odin-checksums/blob/b047487/odin-executable-metadata.csv) · [OdinDownloader ZIP](https://odindownloader.com/wp-content/uploads/Odin3_v3.14.4.zip) · [SamUpdater download page](https://samupdater.com/download-latest-odin-flash-tool-v3-14-4/)
 
 | Archive record | ZIP size in bytes | ZIP SHA-256 |
 | --- | ---: | --- |
 | Get Odin Tool archived reference | 4,511,538 | `eda427680fbd16716b8a4856fd450857d1bcc75e379ac90b9165e49d9d652828` |
-| odindownloader.com download | 4,510,751 | `f68e3aa298ab44400afd0e7d0492aa6d818bea1ad6899e21b569e01a2c757473` |
+| OdinDownloader download | 4,510,751 | `f68e3aa298ab44400afd0e7d0492aa6d818bea1ad6899e21b569e01a2c757473` |
+| SamUpdater download | 1,400,820 | `93dd3721abb68bfd253cc6866c8c68b147cd663dd7e222067c02bd278c0d2e16` |
 
-The [comparison CSV](odin-v3.14.4-archive-comparison.csv) lists both ZIPs and every file inside them, with the source, size and SHA-256 for each record. You can also [compare a ZIP or EXE in your browser](https://getodintool.com/#odin-file-checker). This was an archive inspection; no program was run or phone flashed.
+Use the [comparison CSV](odin-v3.14.4-archive-comparison.csv) to check the ZIP and its files for each source. The [browser file checker](https://getodintool.com/#odin-file-checker) compares your file with the Get Odin Tool archive. These measurements come from static file inspection.
 
 ## How to read the executable metadata
 
