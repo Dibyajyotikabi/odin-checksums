@@ -31,6 +31,14 @@ I used the archived Get Odin Tool reference from the November 5 file check. I do
 
 Use the [comparison CSV](odin-v3.14.4-archive-comparison.csv) to check the ZIP and its files for each source. The [browser file checker](https://getodintool.com/#odin-file-checker) compares your file with the Get Odin Tool archive. These measurements come from static file inspection.
 
+## Windows DLL imports by Odin archive
+
+I read the Windows import tables in 30 EXE and DLL files across the 21 ZIPs listed here. Start with your ZIP's SHA-256 and find the row for the exact file inside it. The [per-file import records](odin-windows-imports.csv) keep direct imports and delay-load imports in separate columns. [Microsoft PE import tables](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#the-idata-section)
+
+The 64-bit `cpprest141_2_10.dll` in the Get Odin Tool v3.14.4 ZIP is the only file in this set that lists `CONCRT140.dll`, `MSVCP140.dll` and `VCRUNTIME140.dll`. The 32-bit `Odin3_v3.14.4.exe` in the same ZIP has its own row. If Windows reports a missing DLL, use the name in the error to check the corresponding record. [Odin Windows requirements](https://getodintool.com/latest/#odin-windows-requirements) · [Microsoft Visual C++ runtime downloads](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170)
+
+These measurements come from static file inspection.
+
 ## How to read the executable metadata
 
 The [executable metadata CSV](odin-executable-metadata.csv) records the EXE path, byte size and SHA-256 for all 21 archives I checked on November 5, 2026. It also includes the PE header and version fields from each EXE. Start with the row for your downloaded ZIP.
