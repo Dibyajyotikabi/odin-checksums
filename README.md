@@ -40,6 +40,15 @@ Use the [comparison CSV](odin-v3.14.4-archive-comparison.csv) to check the ZIP a
 
 [ZIP and member hashes for both 3.14.1 downloads](odin-v3.14.1-archive-comparison.csv)
 
+## Odin 3.12.7 archive comparison
+
+| Archive record | ZIP size in bytes | ZIP SHA-256 |
+| --- | ---: | --- |
+| [Get Odin Tool download](https://getodintool.com/older-versions/odin3-v3-12-7/) | 1,295,578 | `04a771b3ec1129c78272470059616002ff4284bef13d9ab083b847ae4d72a321` |
+| [SamsungOdin download](https://samsungodin.com/download/) | 1,304,725 | `cbe98450a11bfe275f07f2fb47676429cbdcb4aa46521396ff8364465752e24c` |
+
+[ZIP, member and executable section hashes for both 3.12.7 downloads](odin-v3.12.7-archive-comparison.csv)
+
 ## Windows DLL imports by Odin archive
 
 I read the Windows import tables in 30 EXE and DLL files across the 21 ZIPs listed here. Start with your ZIP's SHA-256 and find the row for the exact file inside it. The [per-file import records](odin-windows-imports.csv) keep direct imports and delay-load imports in separate columns. [Microsoft PE import tables](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#the-idata-section)
