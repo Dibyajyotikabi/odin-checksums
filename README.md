@@ -31,6 +31,15 @@ I used the archived Get Odin Tool reference from the November 5 file check. I do
 
 Use the [comparison CSV](odin-v3.14.4-archive-comparison.csv) to check the ZIP and its files for each source. The [browser file checker](https://getodintool.com/#odin-file-checker) compares your file with the Get Odin Tool archive. These measurements come from static file inspection.
 
+## Odin 3.14.1 archive comparison
+
+| Archive record | ZIP size in bytes | ZIP SHA-256 |
+| --- | ---: | --- |
+| Get Odin Tool download | 2,595,015 | `638296a11b1bfa954991b0597214d833511b973480ae9e15e299a761fea1f794` |
+| OdinDownload download | 2,588,043 | `a3455de2b209923dc81fbbb2d85b75fa52df3fe9f30a802ddc8ea9d462384fe1` |
+
+[ZIP and member hashes for both 3.14.1 downloads](odin-v3.14.1-archive-comparison.csv)
+
 ## Windows DLL imports by Odin archive
 
 I read the Windows import tables in 30 EXE and DLL files across the 21 ZIPs listed here. Start with your ZIP's SHA-256 and find the row for the exact file inside it. The [per-file import records](odin-windows-imports.csv) keep direct imports and delay-load imports in separate columns. [Microsoft PE import tables](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#the-idata-section)
